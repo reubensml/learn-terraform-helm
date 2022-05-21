@@ -24,3 +24,13 @@ resource "helm_release" "kubewatch" {
     value = var.slack_app_token
   }
 }
+
+resource "helm_release" "jenkins" {
+  name       = "jenkins"
+  repository = "https://charts.jenkins.io"
+  chart      = "jenkins"
+
+  values = [
+    file("${path.module}/jenkins-values.yaml")
+  ]
+}
